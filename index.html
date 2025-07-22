@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMW Teeth Tycoon: Tyler™ Edition</title>
+  <style>
+    body {
+      background-color: #0e1a2b;
+      font-family: 'Segoe UI', sans-serif;
+      color: #e0e0e0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    h1, h2 {
+      color: #f7c948;
+    }
+    .logo-button {
+      width: 140px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+      transition: transform 0.1s ease;
+    }
+    .logo-button:active {
+      transform: scale(1.1);
+    }
+    #scoreboard {
+      margin: 20px auto;
+      font-size: 18px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 15px;
+      width: 320px;
+    }
+    .upgrade {
+      background-color: #173b6c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 20px;
+      margin: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      font-size: 16px;
+    }
+    .upgrade:hover {
+      background-color: #1e4f8f;
+    }
+    .zone {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <h1>🦷 BMW Teeth Tycoon: Tyler™ Recruitment Edition</h1>
+  <h2>Click the logo. Earn CareCoins. Unlock office madness.</h2>
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUUEhIVFhUVFRUVFRUVFRUWFxUWFxUXFhcVFRUYHSggGBolGxgXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGyslHyUtLS0rLS0tKy0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLSstLf/AABEIAKgBLAMBIgACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABgcEBQEDCAL/xABMEAABAgQEAwUJCgYHAQUBAAABAhEAAwQhBRIxQVFhBhMicYGRBzKhsfAHNEJSYrLRFBVikoKissLw8SNDY3OT0+EkQ1Rjc5T/xAAaAQEBAQEBAQEAAAAAAAAAAAAAAQIDBAUG/8QALhEBAAICAQIFBAEFAQAAAAAAAAECEQMEEiExQQUTcYGRIjJCkaEjscHR4fDxJUL/2gAMAwEAAhEDEQA/AMMSkLFAooooAKKKKACiiigAooooAKRSUAFFFJQAUUUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFFFFABRRRQAUlFJQAUlFJQAUlFJQAUlFJQAUlFJQAUlFJQAUlFJQAUUUUAFFFFABRRRQAUUUUAFFFFABRRSUAFFFFABRRRQAUUUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFLSUUAFFFFABRRRQAUUUUAFJRSUAFJRSUAFJRSUAFJRSUAFJRSUAFJRSUAFJRSUAFJRSUAFJRSUAFJRSUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFLSUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFRSUUAFFFFABRRRQAUUUUAFRSUUAFFFFABRRRQAUUUUAFRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRSUUAFFFFABRS
+  <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+  <audio id="upgradeSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+  <audio id="jeromeSound" src="https://actions.google.com/sounds/v1/human_voices/man_grunt.ogg"></audio>
+  <audio id="tomRev" src="https://actions.google.com/sounds/v1/vehicles/car_rev.ogg"></audio>
+  <audio id="louiseSound" src="https://actions.google.com/sounds/v1/human_voices/man_saying_book_me_another_interview.ogg"></audio>
+
+  <div class="zone">
+    <h3>🏥 Sector Upgrades</h3>
+    <button class="upgrade" onclick="buyUpgrade('jerome')">Hire Jerome (Auto +1/sec) – 50 💰</button>
+    <button class="upgrade" onclick="buyUpgrade('coffee')">Buy Tea for the Team (+2/click) – 100 💰</button>
+    <button class="upgrade" onclick="buyUpgrade('support')">Place Support Worker (+£16/click) – 120 💰</button>
+    <button class="upgrade" onclick="buyUpgrade('nurse')">Place Nurse (+£23/click) – 150 💰</button>
+    <button class="upgrade" onclick="buyUpgrade('manager')">Place Home Manager (+£70/click) – 300 💰</button>
+    <button class="upgrade" onclick="buyUpgrade('tom')">Tom’s Türkiye Teeth (+Auto 100/sec, Click Boost) – 500 💰</button>
+  </div>
+
+  <div id="flavor" style="margin-top:20px; font-style:italic;"></div>
+
+  <canvas id="bmwCanvas"></canvas>
+
+  <script>
+    let score = 0;
+    let coins = 0;
+    let clickPower = 1;
+    let autoRecruit = 0;
+    const flavorText = [
+      "Jerome invoiced in Comic Sans. It worked.",
+      "Louise said 'book me another interview.' Again.",
+      "Support Worker did bedtime, meds, karaoke. Icon.",
+      "Simon vanished mid-call. Everyone nodded politely.",
+      "Tom smiled. CareCoins tripled.",
+      "Anniket tried to pay in Monopoly money.",
+      "Home Manager hosted a bake-off. Morale soared.",
+      "Bingo Night caused HR incident. Biscuit diplomacy resolved it."
+    ];
+
+    function placeStaff() {
+      score += clickPower;
+      coins += clickPower;
+      document.getElementById("clickSound").play();
+      updateDisplay();
+      randomFlavor();
+      if (score >= 100) triggerZone("Children’s Home Hustle");
+      if (score >= 250) triggerZone("Dental Mayhem");
+      if (score >= 500) triggerZone("Client Combat Arena");
+      if (score >= 1000) triggerZone("Louise Hulme’s CV Quest");
+      if (score >= 2000) triggerZone("Boardroom Boss Battle");
+    }
+
+    function updateDisplay() {
+      document.getElementById("score").innerText = score;
+      document.getElementById("coins").innerText = coins;
+      document.getElementById("power").innerText = clickPower;
+    }
+
+    function buyUpgrade(type) {
+      switch (type) {
+        case "jerome":
+          if (coins >= 50) {
+            coins -= 50; autoRecruit += 1;
+            document.getElementById("jeromeSound").play();
+          }
+          break;
+        case "coffee":
+          if (coins >= 100) {
+            coins -= 100; clickPower += 2;
+            document.getElementById("upgradeSound").play();
+          }
+          break;
+        case "support":
+          if (coins >= 120) {
+            coins -= 120; clickPower += 16;
+          }
+          break;
+        case "nurse":
+          if (coins >= 150) {
+            coins -= 150; clickPower += 23;
+          }
+          break;
+        case "manager":
+          if (coins >= 300) {
+            coins -= 300; clickPower += 70;
+          }
+          break;
+        case "tom":
+          if (coins >= 500) {
+            coins -= 500;
+            autoRecruit += 100;
+            clickPower = Math.floor(clickPower * 1.5);
+            document.getElementById("tomRev").play();
+          }
+          break;
+      }
+      updateDisplay();
+    }
+
+    function randomFlavor() {
+      const quote = flavorText[Math.floor(Math.random() * flavorText.length)];
+      document.getElementById("flavor").innerText = `"${quote}"`;
+    }
+
+    function triggerZone(name) {
+      document.getElementById("flavor").innerText = `🔥 New Zone Unlocked: ${name}`;
+      if (name.includes("Louise")) document.getElementById("louiseSound").play();
+    }
+
+    setInterval(() => {
+      score += autoRecruit;
+      coins += autoRecruit;
+      updateDisplay();
+    }, 1000);
+
+    // ✨ Animated BMWs
+    const canvas = document.getElementById("bmwCanvas");
+    const ctx = canvas.getContext("2d");
+    let cars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function spawnBMW() {
+      cars.push({ x: Math.random() * canvas.width, y: -50, speed: 2 + Math.random() * 3 });
+    }
+
+    function drawBMWs() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      cars.forEach(car => {
+        ctx.fillStyle = "#f7c948";
+        ctx.font = "bold 16px Segoe UI";
+        ctx.fillText("🚗 M140i", car.x, car.y);
+        car.y += car.speed;
+      });
+      cars = cars.filter(car => car.y < canvas.height + 50);
+    }
+
+    setInterval(spawnBMW, 800);
+    setInterval(drawBMWs, 60);
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+  </script>
+  <!-- Final Zone: Boardroom Promotion -->
+  <div class="zone" id="finalZone" style="display:none;">
+    <h3>🏢 Final Promotion Zone: The Howard Finley Boardroom</h3>
+    <p>You’re face-to-face with Patrick and Joseph. Jerome’s pacing. Louise is dialing in. What do you say?</p>
+    <button class="upgrade" onclick="pitchPromotion()">Give legendary speech</button>
+  </div>
+
+  <script>
+    function pitchPromotion() {
+      document.getElementById("finalZone").innerHTML = `
+        <h3>👑 You’re now: Recruitment Royalty™</h3>
+        <p>Tom revved the M140i. Jerome submitted invoices with zero errors. Patrick gave a nod of approval seen once every decade.</p>
+        <p>Your team bows. LinkedIn explodes. You are the Tyler™ of legend.</p>
+      `;
+      document.getElementById("tomRev").play();
+      clickPower += 1000;
+      autoRecruit += 500;
+    }
+
+    function triggerZone(name) {
+      document.getElementById("flavor").innerText = `🔥 New Zone Unlocked: ${name}`;
+      if (name.includes("Louise")) document.getElementById("louiseSound").play();
+      if (name.includes("Boardroom")) document.getElementById("finalZone").style.display = "block";
+    }
+  </script>
+
+  <footer style="font-size: 14px; margin-top: 40px; color: #aaa;">
+    Game concept & design by <strong>Tyler™, 17-year-old Recruitment Consultant at Howard Finley Group™</strong><br>
+    Built to entertain, recruit, and unleash sparkle-toothed chaos.<br>
+    © 2025 Tyler™, All rights reserved.
+  </footer>
+</body>
+</html>
